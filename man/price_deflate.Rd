@@ -9,11 +9,11 @@ price_deflate(current_value, sector, current_year, reference_year = 2007)
 \arguments{
 \item{current_value}{The current value that is being deflated to reference-period-equivalent dollars}
 
-\item{sector}{What sector is being adjusted. Currently supports: ip, op, phys, snf, hh, hospice, part_b_drugs, part_d_drugs, and other}
+\item{sector}{What sector is being adjusted. Currently supports: ip, op, phys, snf, hh, hospice, part_b_drugs, part_d_drugs, dme, and other}
 
-\item{current_year}{The current year (2002 - 2014)}
+\item{current_year}{The current year (2007 - 2014)}
 
-\item{reference_year}{The base period to standardize to (2002 - 2014).}
+\item{reference_year}{The base period to standardize to (2007 - 2014).}
 }
 \value{
 A float value, current_value / (current year index / reference year index)
@@ -25,8 +25,14 @@ increases due to utilization changes, it is frequently useful to "deflate"
 spending based on a reference period, so that observed changes are not due to
 inflation.
 }
-\examples{
-# convert $100 in current inpatient spending to year 2000 dollars
-price_deflate(100, "ip", 2014, 2005) 
-}
+\details{
+Most sectors come from annual Federal Register Final Rules. Example:
+\href{https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/PhysicianFeeSched/index.html}{Physician Fee Change Rules}.
 
+Exceptions are \code{other}, which uses the general CPI deflator, and
+\code{part_d_drugs}, which use the CPI-Pharmaceutical deflator.`
+}
+\examples{
+# convert $100 in current inpatient spending to year 2007 dollars
+price_deflate(100, "ip", 2014, 2007) 
+}
